@@ -61,7 +61,7 @@ input {
   border-radius: 10px;
   background-color: rgb(178, 249, 85);
   filter: drop-shadow(0 0 5px white);
-  transform: rotate(1deg);
+  transform: rotate(-1deg);
 }
 
 .buttons > button {
@@ -84,11 +84,11 @@ input {
   margin: 0 10px 0 10px;
 }
 
-.stat:nth-child(1n) {
+.stat:nth-child(odd) {
   background-color: rgb(255, 251, 0);
 }
 
-.stat:nth-child(2n) {
+.stat:nth-child(even) {
   background-color: rgb(247, 212, 16);
   transform: rotate(-1deg);
 }

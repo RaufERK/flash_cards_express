@@ -1,24 +1,24 @@
-const express = require('express');
-const app = express();
-
 const mongoose = require('mongoose');
-
-mongoose.set('useFindAndModify', false);
 const { Question, Card, Game, User, dbOptions, dbUrl } = require('./db/models');
+// настройка которую просит сделать монгус
+mongoose.set('useFindAndModify', false);
+
 const seeder = require('./db/seeder');
 mongoose.connect(dbUrl, dbOptions, () => {
-  console.log('CONNECTED TO MONGO!');
-  // сразу при подключении базы засеиваем её
+  console.log('CONNECTED TO MONGOOSE!');
+  // сразу при подключении базы очищаем и заново засеиваем её
   seeder();
 });
 
+const express = require('express');
+const app = express();
 app.use(express.static('public'));
 app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', async (req, res) => {
-  // показываем список юзеров или можно нове имя ввести
+  // показываем список юзеров или новое имя можно ввести
   const users = await User.find();
   res.render('index', { users, msg: null });
 });
@@ -28,11 +28,11 @@ app.post('/setuser', async (req, res) => {
   try {
     let userId;
     if (req.body.userId) {
-      // либо это уже существующий юзер со своим айди
+      // если получаем из формы айдишник юзера - использоуем его
       userId = req.body.userId;
     }
     if (req.body.username) {
-      // либо новый. Тогда создаём новую запись
+      // если введено новое имя пользователя - создаём новую запись
       const { _id } = await User.create(req.body);
       userId = _id;
     }
@@ -43,12 +43,12 @@ app.post('/setuser', async (req, res) => {
   } catch (err) {
     // в случае ошибки возвращаемся на страницу с регистрацией показываем эту ошибку
     console.log('=======ERROR======');
-    console.log(err);
+    console.log(error);
     res.render('index', { msg: err });
   }
 });
 
-//функция которая принимает массив и возвращает случайные элемент этого массива
+//функция которая принимает массив и возвращает случайный элемент этого массива
 const getRndQuestion = (param = []) => {
   const rndIndex = Math.floor(Math.random() * param.length);
   return param[rndIndex];
@@ -60,8 +60,8 @@ app.post('/newgame', async (req, res) => {
   const { userId, card } = req.body;
   const questions = await Question.find({ card });
   const questionsIds = questions.map(({ _id }) => _id);
-  // создаём объек игры, куда записываем айди юзера,
-  //  массив ийдишников вопросов, их первоначальное колличество
+  // создаём объект игры, куда записываем айди юзера,
+  // массив ийдишников вопросов, их первоначальное колличество
   const { _id: gameId } = await Game.create({
     userId,
     totalQuestionsNumber: questions.length,
@@ -73,7 +73,7 @@ app.post('/newgame', async (req, res) => {
   // отрисовываем случайный вопрос выбраной темы
   // айдишник игры всегда передаём во все запросы
   // туда и обратно, с бека на фронт и с фронта на бек.
-  // Это нужно для чёткого разделения между играми разных пользователей
+  // Это нужно для чёткого разделения между играми (сессиями) разных пользователей
   res.render('question', {
     question: getRndQuestion(questions),
     gameId,
@@ -97,16 +97,15 @@ app.post('/answer', async (req, res) => {
   // сравниваем ответ пользователя и правильный ответ из базы
   if (String(answer).toLowerCase() === String(userAnswer).toLowerCase()) {
     answer = 'Правильно!';
-    // исключаем этот вопрос из игры
+
+    // исключаем этот вопрос списка задаваемых вопросов
     questionsIds = questionsIds.filter((el) => String(el._id) !== questionsId);
-    //увеличиваем счётчик елс иотвечаем на вопрос первый раз
+
+    //увеличиваем счётчик если отвечаем на вопрос первый раз
     if (!answeredQuestion.includes(questionsId)) {
       atFirstTry++;
     }
   }
-
-  //накапливаем все вопросы на которые отвечаем
-  answeredQuestion.push(questionsId);
 
   // обновляем информацю об игре в базе
   const game = await Game.findOneAndUpdate(
@@ -125,8 +124,8 @@ app.post('/answer', async (req, res) => {
   // если вопросы закончились выводим статистику
   if (!questionsIds.length) {
     const userGames = await Game.find({ userId }).populate({ path: 'card' });
-    const user = await User.findById(userId);
-    res.render('stat', { game, userGames, user });
+    const user = await User.findById(userId)
+    res.render('stat', { game, userGames, user});
     return;
   }
 
@@ -157,4 +156,4 @@ app.post('/question', async (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('The server is running!'));
+app.listen(3000, () => console.log('The server is running noWWWW!'));
