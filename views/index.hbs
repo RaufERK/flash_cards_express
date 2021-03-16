@@ -1,0 +1,21 @@
+{{#if msg}}
+<h2>{{msg}}</h2>
+{{/ if}}
+
+Chuse your name or enter new name:
+<ul>
+  {{#each users}}
+  <form action="/setuser" method="post">
+    <input type="text" name="userId" id="" value="{{this._id}}" class="hide">
+    <button>{{this.username}}</button>
+  </form>
+  {{/each}}
+</ul>
+========
+<form action="/setuser" method="post">
+  <label>
+    Pease enter you Name :
+  </label>
+  <input type="text" name="username" id="" placeholder="name">
+  <button>POST NEW USER</button>
+</form>

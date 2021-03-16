@@ -1,0 +1,14 @@
+body {
+  background-color: lightpink;
+}
+
+
+button {
+  width: 300px;
+}
+
+
+.hide{
+  display: none;
+  visibility: hidden;
+}
