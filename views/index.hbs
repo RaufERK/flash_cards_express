@@ -1,21 +1,33 @@
 {{#if msg}}
-<h2>{{msg}}</h2>
-{{/ if}}
-
-Chuse your name or enter new name:
+  <h2>
+    {{msg}}
+  </h2>
+{{/if}}
+<div class="msg">
+  Выбирайте существующего пользователя или регистрируйтесь:
+</div>
 <ul>
   {{#each users}}
-  <form action="/setuser" method="post">
-    <input type="text" name="userId" id="" value="{{this._id}}" class="hide">
-    <button>{{this.username}}</button>
-  </form>
+    <form action="/setuser" method="post">
+      <input
+        type="text"
+        name="userId"
+        id=""
+        value="{{this._id}}"
+        class="hide"
+      />
+      <button>
+        {{this.username}}
+      </button>
+    </form>
   {{/each}}
 </ul>
-========
-<form action="/setuser" method="post">
+<form action="/setuser" method="post" class="block">
   <label>
-    Pease enter you Name :
+    введите своё имя :
   </label>
-  <input type="text" name="username" id="" placeholder="name">
-  <button>POST NEW USER</button>
+  <input type="text" name="username" id="" placeholder="name" />
+  <button>
+    зарегестрироваться
+  </button>
 </form>

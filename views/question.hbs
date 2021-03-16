@@ -1,9 +1,9 @@
-<form action="/answer" method="post">
+<form action="/answer" method="post" class='block'>
   <label>
     {{question.question}}
     <input type="text" name='userAnswer' placeholder="enter your answer">
     <input class='hide' type="text" name='questionsId' value='{{question._id}}'>
     <input class='hide' type="text" name='gameId' value='{{gameId}}'>
-    <button>ANSWER</button>
+    <button>ответить</button>
   </label>
 </form>

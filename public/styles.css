@@ -1,14 +1,99 @@
 body {
-  background-color: lightpink;
+  background-color: rgb(247, 230, 235);
+  font-family: 'Roboto Slab', serif;
+  font-size: x-large;
+  color: rgb(89, 20, 136);
 }
-
 
 button {
   width: 300px;
+  font-family: 'Roboto Slab', serif;
+  font-size: large;
+  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+  color: rgb(116, 36, 169);
+  transform: rotate(1deg);
 }
 
+input {
+  font-family: 'Roboto Slab', serif;
+  font-size: medium;
+  color: rgb(116, 36, 169);
+  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+  text-shadow: 1px 1px 9px white;
+  transform: rotate(1deg);
+}
 
-.hide{
+.hide {
   display: none;
-  visibility: hidden;
+}
+
+.block {
+  margin: 30px;
+  padding: 20px;
+  border: 3px solid rgb(228, 99, 196);
+  border-radius: 20px;
+  background-color: lightpink;
+  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+  border: 8px solid rgb(176, 99, 228);
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  transform: rotate(-1deg);
+}
+
+.msg {
+  margin: 30px;
+  padding: 10px;
+  border: 8px solid rgb(228, 99, 196);
+  border-radius: 20px;
+  background-color: rgb(182, 197, 255);
+  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  transform: rotate(-1deg);
+}
+
+.buttons {
+  margin: 30px;
+  padding: 15px;
+  border: 8px solid rgb(34, 255, 0);
+  border-radius: 10px;
+  background-color: rgb(178, 249, 85);
+  filter: drop-shadow(0 0 5px white);
+  transform: rotate(1deg);
+}
+
+.buttons > button {
+  width: 100%;
+}
+
+.stat {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(240, 202, 207);
+  border: 3px solid rgb(184, 153, 176);
+  font-size: medium;
+  display: flex;
+  justify-content: space-between;
+  filter: drop-shadow(0 0 4px rgb(142, 141, 223));
+}
+
+.statSpan {
+  margin: 0 10px 0 10px;
+}
+
+.stat:nth-child(1n) {
+  background-color: rgb(255, 251, 0);
+}
+
+.stat:nth-child(2n) {
+  background-color: rgb(247, 212, 16);
+  transform: rotate(-1deg);
+}
+
+h3 {
+  background-color: rgb(208, 217, 252);
+  border-radius: 7px;
 }

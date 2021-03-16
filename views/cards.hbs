@@ -1,14 +1,11 @@
 <ul class="people_list">
   {{#each cards}}
   <li>
-
     <form action="/newgame" method="POST">
       <input class="hide" type="text" name="card" id="" value="{{this._id}}">
       <input class="hide" type="text" name="userId" id="" value="{{../userId}}">
       <button>{{this.name}}</button>
     </form>
-
-
 
   </li>
   {{/each}}

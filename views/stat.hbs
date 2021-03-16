@@ -1,10 +1,59 @@
-<h1>STAT :</h1>
-
-<h2>
-{{game.totalAttempts}}
-</h2>
-
-
-<h2>
-{{length}}
-</h2>
+<div class="msg">
+  <h5>
+    результат игры :
+    {{user.username}}
+    </h3>
+    {{#with game}}
+    <h6>
+      всего было попыток :
+      {{totalAttempts}}
+    </h6>
+    <h6>
+      Всего вопросов в колоде :
+      {{totalQuestionsNumber}}
+    </h6>
+    <h6>
+      с первой попытки оветил :
+      {{atFirstTry}}
+    </h6>
+    {{/with}}
+</div>
+<ol>
+  {{#each userGames}}
+  <li class="stat">
+    <span class="statSpan">
+      тема :
+      <strong>
+        {{card.name}}
+      </strong>
+    </span>
+    <span class="statSpan">
+      отвечал на вопросы :
+      <strong>
+        {{totalAttempts}}
+      </strong>
+      раз(а)
+    </span>
+    <span class="statSpan">
+      с первого раза ответил :
+      <strong>
+        {{atFirstTry}}
+      </strong>
+      раз(а)
+    </span>
+    <span class="statSpan">
+      в колоде было :
+      <strong>
+        {{totalQuestionsNumber}}
+      </strong>
+      вопросов
+    </span>
+  </li>
+  {{/each}}
+</ol>
+<form action="/setuser" method="post" class="buttons">
+  <input class="hide" type="text" name="userId" id="" value="{{user._id}}" />
+  <button>
+    новая игра
+  </button>
+</form>

@@ -19,10 +19,13 @@ const User = model('User', {
 
 const Game = model('Game', {
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  totalQuestionsNumber: { type: Number, default: 0 },
   totalAttempts: { type: Number, default: 0 },
   atFirstTry: { type: Number, default: 0 },
   card: { type: Schema.Types.ObjectId, ref: 'Card' },
   questionsIds: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+  answeredQuestion: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+  date: { type: Date, default: Date.now },
 });
 
 module.exports = { Question, Card, Game, dbUrl, dbOptions, User };
