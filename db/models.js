@@ -4,7 +4,6 @@ const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const Card = model('Card', {
   name: String,
-  themeNumber: String,
 });
 
 const Question = model('Question', {

@@ -113,7 +113,6 @@ app.post('/answer', async (req, res) => {
     {
       questionsIds,
       atFirstTry,
-      answeredQuestion,
       totalAttempts: totalAttempts + 1,
       //сохраняю аийдшники вопросов на которые я отвечал
       answeredQuestion: [...answeredQuestion, questionsId],
@@ -124,8 +123,8 @@ app.post('/answer', async (req, res) => {
   // если вопросы закончились выводим статистику
   if (!questionsIds.length) {
     const userGames = await Game.find({ userId }).populate({ path: 'card' });
-    const user = await User.findById(userId)
-    res.render('stat', { game, userGames, user});
+    const user = await User.findById(userId);
+    res.render('stat', { game, userGames, user });
     return;
   }
 
